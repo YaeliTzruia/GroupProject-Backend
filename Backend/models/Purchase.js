@@ -4,7 +4,7 @@ const PurchaseSchema = new mongoose.Schema(
   {
     customer: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     paymentMethod: { type: String, required: true },
-    items: [{ product: {type: mongoose.Schema.Types.ObjectId, ref: "Pet" }, quantity: Number, required: true}],
+    items: [{ product: {type: mongoose.Schema.Types.ObjectId, ref: "Product" }, quantity: Number, required: true}],
   },
   {
     timestamps: true,
