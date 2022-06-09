@@ -4,8 +4,13 @@ const cors = require("cors");
 const app = express();
 const PORT = 4000;
 
+app.use(express.json());
+app.use(express.urlencoded());
+
 //routes
-const UsersRoutes = require("../Backend/routes/users");
+const ProduceRoutes = require("./routes/products");
+const UsersRoutes = require("./routes/users");
+const AdminRoutes = require("./routes/admin");
 
 //Mongo
 mongoose
@@ -24,7 +29,9 @@ app.use(
 );
 
 //routes
+app.use("/products", ProduceRoutes);
 app.use("/users", UsersRoutes);
+app.use("/admin", AdminRoutes);
 
 //to parse body
 app.use(express.json());
