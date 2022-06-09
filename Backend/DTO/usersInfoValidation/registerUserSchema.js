@@ -1,8 +1,8 @@
 const registerUserSchema = {
   type: "object",
   properties: {
-    firstname: { type: "string" },
-    lastname: { type: "string" },
+    firstName: { type: "string" },
+    lastName: { type: "string" },
     phone: { type: "integer" },
     email: { type: "string", format: "email" },
     password: { type: "string" },
@@ -10,8 +10,8 @@ const registerUserSchema = {
     photoURL: { type: "string" },
   },
   required: [
-    "firstname",
-    "lastname",
+    "firstName",
+    "lastName",
     "phone",
     "email",
     "password",

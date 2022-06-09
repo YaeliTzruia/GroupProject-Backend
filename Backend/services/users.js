@@ -1,15 +1,5 @@
 const User = require("../models/User");
 
-const getAllUsersData = async () => {
-  try {
-    const users = await User.find();
-    return users;
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
-};
-
 const findByEmail = async (email) => {
   try {
     const findUser = await User.findOne({ email });
@@ -52,22 +42,9 @@ const update = async (id, item) => {
   }
 };
 
-const del = async (id) => {
-  try {
-    const users = await User.findById(id);
-    const del = await users.remove(id);
-    return del;
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
-};
-
 module.exports = {
-  getAllUsersData,
   findByEmail,
   getById,
   add,
   update,
-  del,
 };
