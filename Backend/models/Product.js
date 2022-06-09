@@ -20,6 +20,20 @@ const ProductSchema = new mongoose.Schema(
   }
 );
 
+ProductSchema.methods.toProfileJSON = function () {
+  return {
+    name: this.name,
+    variety: this,
+    category: this.category,
+    size: this.size,
+    brand: this.brand,
+    price: this.price,
+    quantity: this.quantity,
+    allergens: this.allergens,
+    keywords: this.keywords,
+  };
+};
+
 const Product = mongoose.model("Product", ProductSchema);
 
 module.exports = Product;

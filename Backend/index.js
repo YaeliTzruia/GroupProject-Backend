@@ -8,8 +8,10 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 //routes
+const ProduceRoutes = require("./routes/products");
 const UsersRoutes = require("./routes/users");
 const AdminRoutes = require("./routes/admin");
+
 //Mongo
 mongoose
   .connect(
@@ -27,6 +29,7 @@ app.use(
 );
 
 //routes
+app.use("/products", ProduceRoutes);
 app.use("/users", UsersRoutes);
 app.use("/admin", AdminRoutes);
 

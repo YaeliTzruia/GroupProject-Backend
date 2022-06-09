@@ -6,8 +6,8 @@ const usersController = require("../controllers/users");
 
 route.get("/me", usersController.getMe);
 route.get("/:userId", usersController.getById);
-route.post("/", usersController.addNew);
-route.put("/:userId", usersController.update);
+route.post("/", usersController.addNewUser);
+route.put("/:userId", usersController.updateUser);
 
 module.exports = route;
 

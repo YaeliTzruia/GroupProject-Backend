@@ -10,16 +10,6 @@ const getAllUsersData = async () => {
   }
 };
 
-const getById = async (id) => {
-  try {
-    const user = await User.findById(id);
-    return user;
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
-};
-
 const delUser = async (id) => {
   try {
     const users = await User.findById(id);
@@ -33,6 +23,5 @@ const delUser = async (id) => {
 
 module.exports = {
   getAllUsersData,
-  getById,
   delUser,
 };

@@ -20,21 +20,21 @@ const getById = async (req, res) => {
   }
 };
 
-const addNew = async (req, res) => {
+const addNewUser = async (req, res) => {
   try {
     const obj = {
       ...req.body,
     };
-    const newId = usersService.add(obj);
+    const newUserId = usersService.add(obj);
     console.log("user Added!");
-    res.send(newId);
+    res.send(newUserId);
   } catch (err) {
     console.log(err);
     return err;
   }
 };
 
-const update = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
     const id = req.params.userId;
     const item = req.body;
@@ -49,6 +49,6 @@ const update = async (req, res) => {
 module.exports = {
   getMe,
   getById,
-  addNew,
-  update,
+  addNewUser,
+  updateUser,
 };

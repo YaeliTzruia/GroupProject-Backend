@@ -21,7 +21,7 @@ const getById = async (id) => {
 };
 
 const add = async (NewUser) => {
-  //   delete addUser.password;
+  //   delete password;
   try {
     const newUser = new User(NewUser);
     const user = await newUser.save();

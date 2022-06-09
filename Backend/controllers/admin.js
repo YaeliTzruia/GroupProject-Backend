@@ -1,19 +1,10 @@
 const adminService = require("../services/admin");
+const usersService = require("../services/users");
 
 const getAllUsers = async (req, res) => {
   try {
     const users = await adminService.getAllUsersData();
     res.json(users);
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
-};
-
-const getById = async (req, res) => {
-  try {
-    const user = await adminService.getById(req.params.userId);
-    res.send(user);
   } catch (err) {
     console.log(err);
     return err;
@@ -33,6 +24,5 @@ const delUser = async (req, res) => {
 
 module.exports = {
   getAllUsers,
-  getById,
   delUser,
 };
