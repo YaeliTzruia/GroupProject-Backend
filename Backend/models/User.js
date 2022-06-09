@@ -22,6 +22,18 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
+UserSchema.methods.toProfileJSON = function () {
+  return {
+    firstName: this.firstName,
+    lastName: this.lastName,
+    phone: this.phone,
+    email: this.email,
+    password: this.password,
+    accessLevel: this.accessLevel,
+    purchases: this.purchases,
+  };
+};
+
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;

@@ -4,8 +4,10 @@ const cors = require("cors");
 const app = express();
 const PORT = 4000;
 
+app.use(express.json());
+app.use(express.urlencoded());
 //routes
-const UsersRoutes = require("../Backend/routes/users");
+const UsersRoutes = require("./routes/users");
 
 //Mongo
 mongoose
