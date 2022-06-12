@@ -13,8 +13,8 @@ const getAllUsers = async (req, res) => {
 
 const delUser = async (req, res) => {
   try {
-    const user = await adminService.getById(req.params.userId);
-    await usersService.delUser(user._id);
+    const user = await usersService.getById(req.params.userId);
+    await adminService.delUser(user._id);
     res.send("User Deleted!");
   } catch (err) {
     console.log(err);

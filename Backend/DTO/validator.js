@@ -1,24 +1,15 @@
-// const ajv = require("./ajv");
-
-const validator = async (schema) => {
-  console.log(schema, "schema");
-  // return (req, res, next) => {
-  //   try {
-  //     const obj = req.body;
-  //     console.log(obj, "obj");
-  //     const validator = ajv.compile(schema);
-  //     const valid = validator(obj);
-  //     console.log(valid, "valid");
-  //     if (!valid) {
-  //       return next("validator.errors");
-  //     }
-  //     res("validator passed!");
-  //     next();
-  //   } catch (err) {
-  //     console.log(err);
-  //     return err;
-  //   }
-  // };
+const validator = (schema) => {
+  return async (req, res, next) => {
+    try {
+      await schema.validate(req.body);
+      res.json("post succeeded");
+      next();
+    } catch (err) {
+      console.log(err);
+      res.json(err.message);
+      next(err);
+    }
+  };
 };
 
 module.exports = validator;
