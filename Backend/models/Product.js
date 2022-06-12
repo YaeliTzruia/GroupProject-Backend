@@ -20,7 +20,7 @@ const ProductSchema = new mongoose.Schema(
   }
 );
 
-ProductSchema.methods.toProfileJSON = function () {
+ProductSchema.methods.toProductDetailsJSON = function () {
   return {
     name: this.name,
     variety: this,
