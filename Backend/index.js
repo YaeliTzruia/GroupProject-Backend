@@ -1,11 +1,25 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+
 const app = express();
-const PORT = 4000;
+const PORT = process.env.API_PORT;
 
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cookieParser());
+
+//error handling (all next with text)
+app.use((err, req, res, next) => {
+  const { status, msg } = err;
+  console.log("ERROR", err);
+  res.status(status).send({
+    error: true,
+    message: msg,
+  });
+});
 
 //routes
 const ProduceRoutes = require("./routes/products");
