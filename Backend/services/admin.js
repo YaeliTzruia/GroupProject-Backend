@@ -11,6 +11,7 @@ const getAllUsersData = async () => {
 };
 
 const delUser = async (id) => {
+  console.log(id, "id");
   try {
     const users = await User.findById(id);
     const del = await users.remove(id);
