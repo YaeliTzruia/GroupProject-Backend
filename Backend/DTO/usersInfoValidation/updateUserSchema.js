@@ -1,8 +1,8 @@
 const Yup = require("yup");
 
-const registerUserSchema = Yup.object({
+const updateUserSchema = Yup.object({
   photoURL: Yup.string(),
-  firstName: Yup.string().required("Firs tname is required"),
+  firstName: Yup.string().required("First name is required"),
   lastName: Yup.string().required("Last name is required"),
   phone: Yup.string()
     .required("Phone number is required")
@@ -11,13 +11,13 @@ const registerUserSchema = Yup.object({
     .email("Invalid email format")
     .required("Email is required"),
   password: Yup.string()
-    .required("Password is required")
-    .min(2, "Password must be a minimum of 2 characters")
+    .min(2, "Password must have a minimum of 2 characters")
     .max(16, "Password can have a maximum of 16 characters"),
   // .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
-  passwordConfirmation: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("must enter the confirmation password"),
+  passwordConfirmation: Yup.string().oneOf(
+    [Yup.ref("password"), null],
+    "Passwords must match"
+  ),
 });
 
-module.exports = registerUserSchema;
+module.exports = updateUserSchema;
