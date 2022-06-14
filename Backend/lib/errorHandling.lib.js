@@ -22,6 +22,7 @@ class ErrorHandler {
       405,
       "You do not have permission to access this part of the website"
     );
+
   static noRecipe = () =>
     new ErrorHandler(404, "No recipe matching this id found");
 }
