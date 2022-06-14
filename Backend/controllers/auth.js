@@ -6,7 +6,7 @@ const cookieSettings = require("../DTO/auth/cookie");
 const User = require("../models/User");
 
 const register = async (req, res, next) => {
-  // res.clearCookie("JWT");
+  res.clearCookie("JWT");
   const newuser = { ...req.body };
   console.log(newuser, "new user");
   delete newuser.passwordConfirmation;
@@ -15,7 +15,7 @@ const register = async (req, res, next) => {
 
   try {
     await user.save();
-    // delete user.password;
+    delete user.password;
 
     const token = authService.generateToken(user._id);
     res.cookie("JWT", token, cookieSettings);
