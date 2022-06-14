@@ -11,7 +11,6 @@ const authController = require("../controllers/auth");
 route.get("/me", usersController.getMe);
 route.get("/:userId", usersController.getById);
 
-// route.get('logout', )
 route.post("/register", validator(registerUserSchema), authController.register);
 route.post("/login", validator(loginUserSchema), authController.login);
 
