@@ -27,7 +27,7 @@ const addNewUser = async (req, res) => {
     };
     const newUserId = usersService.add(obj);
     console.log("user Added!");
-    res.send(newUserId);
+    res.send({"status": "success","message": `A new user has been created with this information: ${newUserId}`});
   } catch (err) {
     console.log(err);
     return err;
@@ -39,7 +39,8 @@ const updateUser = async (req, res) => {
     const id = req.params.userId;
     const item = req.body;
     await usersService.update(id, item);
-    res.send("User Updated");
+    res.send({"status": "success", "message":"User Updated", 
+    "new info" : item});
   } catch (err) {
     console.log(err);
     return err;

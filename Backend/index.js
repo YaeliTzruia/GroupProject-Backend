@@ -1,15 +1,17 @@
 require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
+const morgan = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const app = express();
 const PORT = process.env.API_PORT;
+const mongoose = require("mongoose");
 
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cookieParser());
+app.use(morgan("combined"));
 
 //error handling (all next with text)
 app.use((err, req, res, next) => {
@@ -25,6 +27,7 @@ app.use((err, req, res, next) => {
 const ProduceRoutes = require("./routes/products");
 const UsersRoutes = require("./routes/users");
 const AdminRoutes = require("./routes/admin");
+const RecipesRoutes = require("./routes/recipes");
 
 //Mongo
 mongoose
@@ -46,9 +49,7 @@ app.use(
 app.use("/products", ProduceRoutes);
 app.use("/users", UsersRoutes);
 app.use("/admin", AdminRoutes);
-
-//to parse body
-app.use(express.json());
+app.use("/recipes", RecipesRoutes);
 
 app.listen(PORT, () => {
   console.log(`our server is running on port: ${PORT}`);

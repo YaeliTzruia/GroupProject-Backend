@@ -6,8 +6,8 @@ const loginUserSchema = Yup.object({
     .required("Email is required"),
   password: Yup.string()
     .required("Password is required")
-    .min(2, "Minimum 2 characters")
-    .max(16, "Maximum 16 characters"),
+    .min(2, "Password must have a minimum of 2 characters")
+    .max(16, "Password can have a maximum 16 characters"),
 });
 
 module.exports = loginUserSchema;
