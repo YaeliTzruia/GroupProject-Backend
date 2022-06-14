@@ -6,7 +6,7 @@ const registerUserSchema = Yup.object({
   lastName: Yup.string().required("Last name is required"),
   phone: Yup.string()
     .required("Phone number is required")
-    .min(10, "Phone number must be at least 10 digits"),
+    .min(9, "Phone number must be at least 9 digits"),
   email: Yup.string()
     .email("Invalid email format")
     .required("Email is required"),
