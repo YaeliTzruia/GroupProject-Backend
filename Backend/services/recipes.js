@@ -16,6 +16,7 @@ const getRecipeById = async (id) => {
     const recipe = await Recipe.findById(id);
     return recipe;
   } catch (err) {
+    console.log("err", err)
     return ErrorHandler.noRecipe();
   }
 };
@@ -23,11 +24,10 @@ const getRecipeById = async (id) => {
 const updateRecipe = async (id, item) => {
   try {
     const recipe = await Recipe.findByIdAndUpdate(id, item);
-    console.log(recipe, "recipe")
     return recipe;
   } catch (err) {
     console.log(err);
-    return ErrorHandler.noRecipe();
+    return err;
   }
 };
 
@@ -35,7 +35,7 @@ const addRecipe = async (NewRecipe) => {
   try {
     const newRecipe = new Recipe(NewRecipe);
     const recipe = await newRecipe.save();
-    return recipe;
+    return newRecipe;
   } catch (err) {
     console.log(err);
     return err;

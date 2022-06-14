@@ -8,7 +8,12 @@ const updateUserSchema = require("../DTO/usersInfoValidation/updateUserSchema");
 
 route.get("/me", usersController.getMe);
 route.get("/:userId", usersController.getById);
-route.post("/", validator(registerUserSchema), usersController.addNewUser);
+route.post(
+  "/register",
+  validator(registerUserSchema),
+  usersController.addNewUser
+);
+
 route.put("/:userId", validator(updateUserSchema), usersController.updateUser);
 
 module.exports = route;
