@@ -7,7 +7,7 @@ const generateHash = (password) => {
 };
 
 const validateHash = (hashedPassword, password) => {
-  const hash = hashLib.check(password, hashedPassword);
+  const hash = hashLib.check(hashedPassword, password);
   return hash;
 };
 

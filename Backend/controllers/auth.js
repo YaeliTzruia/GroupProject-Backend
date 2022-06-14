@@ -1,26 +1,24 @@
 const usersService = require("../services/users");
 const authService = require("../services/auth");
 const ErrorHandler = require("../lib/errorHandling.lib");
+const cookieSettings = require("../DTO/auth/cookie");
 
 const User = require("../models/User");
 
 const register = async (req, res, next) => {
-  res.clearCookie("JWT");
+  // res.clearCookie("JWT");
   const newuser = { ...req.body };
+  console.log(newuser, "new user");
   delete newuser.passwordConfirmation;
   const hashed = authService.generateHash(newuser.password);
   const user = new User({ ...req.body, password: hashed });
 
   try {
     await user.save();
-    delete user.password;
+    // delete user.password;
 
     const token = authService.generateToken(user._id);
-    res.cookie("JWT", token, {
-      maxAge: 1000 * 60 * 60 * 24 * 365,
-      httpOnly: true,
-      domain: "localhost",
-    });
+    res.cookie("JWT", token, cookieSettings);
     res.json(user);
   } catch (err) {
     console.log(err);
