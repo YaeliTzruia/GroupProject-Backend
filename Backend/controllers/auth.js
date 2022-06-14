@@ -16,10 +16,9 @@ const register = async (req, res, next) => {
   try {
     await user.save();
     delete user.password;
-
     const token = authService.generateToken(user._id);
     res.cookie("JWT", token, cookieSettings);
-    res.json(user);
+    res.json({user, token});
   } catch (err) {
     console.log(err);
     next(ErrorHandler.userAlreadyExists());

@@ -25,6 +25,9 @@ class ErrorHandler {
 
   static noRecipe = () =>
     new ErrorHandler(404, "No recipe matching this id found");
+
+    static noProduct = () =>
+    new ErrorHandler(404, "No product matching this id found");
 }
 
 module.exports = ErrorHandler;

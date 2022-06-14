@@ -27,9 +27,8 @@ const updateRecipe = async (req, res, next) => {
   try {
     const id = req.params.recipeId;
     const item = req.body;
-    console.log("item", item);
     await recipesService.updateRecipe(id, item);
-    res.send({"status": "success" ,"message": `recipe with id ${id} updated!`, "new_recipe!": item});
+    res.send({"status": "success" ,"message": `recipe with id ${id} updated!`, "new_recipe": item});
   } catch (err) {
     return err;
   }

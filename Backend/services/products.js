@@ -34,7 +34,7 @@ const addProduct = async (NewProduct) => {
   try {
     const newProduct = new Product(NewProduct);
     const product = await newProduct.save();
-    return product;
+    return newProduct;
   } catch (err) {
     console.log(err);
     return err;
