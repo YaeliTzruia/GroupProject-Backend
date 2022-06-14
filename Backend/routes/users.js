@@ -9,9 +9,8 @@ const updateUserSchema = require("../DTO/usersInfoValidation/updateUserSchema");
 const authController = require("../controllers/auth");
 const authCheck = require("../middlewares/authCheck");
 
-route.get("/me", usersController.getMe);
+route.get("/me", authCheck, usersController.getMe);
 route.get("/:userId", usersController.getById);
-
 route.post("/register", validator(registerUserSchema), authController.register);
 route.post("/login", validator(loginUserSchema), authController.login);
 
