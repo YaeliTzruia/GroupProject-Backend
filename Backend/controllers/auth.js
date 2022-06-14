@@ -38,7 +38,7 @@ const login = async (req, res, next) => {
   if (isValid) {
     const token = authService.generateToken(user._id);
     res.cookie("JWT", token, cookieSettings);
-    res.json({ status: "success", message: "Logged in", token });
+    res.json({ status: "success", message: "Logged in", user, token });
   }
   next(ErrorHandler.LoginFailed());
 };
