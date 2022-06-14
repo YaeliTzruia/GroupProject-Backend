@@ -13,7 +13,7 @@ const getMe = async (req, res) => {
 const getById = async (req, res) => {
   try {
     const user = await usersService.getById(req.params.userId);
-    res.send(user);
+    res.send({status: "success", user: user});
   } catch (err) {
     console.log(err);
     return err;
@@ -27,7 +27,10 @@ const addNewUser = async (req, res) => {
     };
     const newUserId = usersService.add(obj);
     console.log("user Added!");
-    res.send({"status": "success","message": `A new user has been created with this information: ${newUserId}`});
+    res.send({
+      status: "success",
+      message: `A new user has been created with this information: ${newUserId}`,
+    });
   } catch (err) {
     console.log(err);
     return err;
@@ -39,8 +42,7 @@ const updateUser = async (req, res) => {
     const id = req.params.userId;
     const item = req.body;
     await usersService.update(id, item);
-    res.send({"status": "success", "message":"User Updated", 
-    "new info" : item});
+    res.send({ status: "success", message: "User Updated", "new info": item });
   } catch (err) {
     console.log(err);
     return err;

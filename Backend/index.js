@@ -7,10 +7,9 @@ const cookieParser = require("cookie-parser");
 const app = express();
 const PORT = process.env.API_PORT;
 const mongoose = require("mongoose");
-
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cookieParser());
 app.use(morgan("combined"));
 
 //error handling (all next with text)
