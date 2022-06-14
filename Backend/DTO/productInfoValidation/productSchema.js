@@ -5,7 +5,7 @@ const productSchema = Yup.object({
   variety: Yup.string().required("variety required"),
   category: Yup.string().required("category required"),
   size: Yup.string().required("size required"),
-  brand: Yup.string().required("brand required"),
+  brand: Yup.string(),
   price: Yup.string().required("price required"),
   quantity: Yup.number().required("quantity required"),
   allergens: Yup.array()

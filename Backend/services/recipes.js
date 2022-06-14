@@ -16,7 +16,7 @@ const getRecipeById = async (id) => {
     const recipe = await Recipe.findById(id);
     return recipe;
   } catch (err) {
-    console.log("err", err)
+    console.log("err", err);
     return ErrorHandler.noRecipe();
   }
 };
@@ -47,7 +47,7 @@ const deleteRecipe = async (id) => {
     return del;
   } catch (err) {
     console.log(err);
-    return ErrorHandler.noRecipe();
+    return err;
   }
 };
 

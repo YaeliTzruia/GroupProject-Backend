@@ -4,6 +4,7 @@ const usersService = require("../services/users");
 const getAllUsers = async (req, res) => {
   try {
     const users = await adminService.getAllUsersData();
+    console.log("users", users)
     res.json(users);
   } catch (err) {
     console.log(err);
