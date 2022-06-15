@@ -39,7 +39,11 @@ const addNewProduct = async (req, res) => {
   try {
     const obj = { ...req.body };
     const newProduct = await produceService.addProduct(obj);
-    res.send({"status": "success", "_id of new product": newProduct._id, newProduct});
+    res.send({
+      status: "success",
+      "_id of new product": newProduct._id,
+      newProduct,
+    });
   } catch (err) {
     console.log(err);
     return err;
@@ -49,7 +53,10 @@ const deleteProduct = async (req, res) => {
   try {
     const product = await produceService.getProductById(req.params.productId);
     await produceService.deleteProduct(product);
-    res.send({"status": "success", "msg": `Product with id ${req.params.productId} deleted!`});
+    res.send({
+      status: "success",
+      msg: `Product with id ${req.params.productId} deleted!`,
+    });
   } catch (err) {
     console.log(err);
     return err;
