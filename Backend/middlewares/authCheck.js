@@ -25,10 +25,12 @@ const authCheck = (req, res, next) => {
       }
     });
   }
+
   res.send(ErrorHandler.needLogin());
 
   res.send({ status: "Error", message: "No JWT was found" });
   next("No JWT was found");
+
 };
 
 module.exports = authCheck;
