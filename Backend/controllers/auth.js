@@ -16,30 +16,34 @@ const register = async (req, res, next) => {
   try {
     await user.save();
     delete user.password;
-    const token = await authService.generateToken(user._id);
+    const token = authService.generateToken(user._id);
     res.cookie("JWT", token, cookieSettings);
-    res.json({user, token});
+    res.json({ user, token });
   } catch (err) {
     console.log(err);
+    res.send(ErrorHandler.userAlreadyExists());
     next(ErrorHandler.userAlreadyExists());
   }
 };
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-  const user = await usersService.findByEmail(email);
 
-  if (!user) {
-    return next(ErrorHandler.userNotFound());
+  try {
+    const user = await usersService.findByEmail(email);
+    const isValid = authService.validateHash(password, user.password);
+    if (!isValid) {
+      res.send({ status: "Error", message: "Password incorrect" });
+    } else if (isValid) {
+      const token = authService.generateToken(user._id);
+      res.cookie("JWT", token, cookieSettings);
+      res.json({ status: "success", message: "Logged in", user, token });
+    }
+  } catch (err) {
+    res.send(ErrorHandler.userNotFound());
   }
-  const isValid = authService.validateHash(password, user.password);
 
-  if (isValid) {
-    const token = authService.generateToken(user._id);
-    res.cookie("JWT", token, cookieSettings);
-    res.json({ status: "success", message: "Logged in", user, token });
-  }
-  next(ErrorHandler.LoginFailed());
+  // next(ErrorHandler.LoginFailed());
 };
 
 module.exports = { register, login };
