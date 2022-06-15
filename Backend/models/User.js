@@ -29,7 +29,6 @@ UserSchema.methods.toProfileJSON = function () {
     lastName: this.lastName,
     phone: this.phone,
     email: this.email,
-    password: this.password,
     accessLevel: this.accessLevel,
     purchases: this.purchases,
     savedCart: this.savedCart,
