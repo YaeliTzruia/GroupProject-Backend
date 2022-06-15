@@ -3,13 +3,13 @@ const permissions = require("../lib/permissions.lib");
 
 const adminMiddleware = (req, res, next) => {
   const user = req.user;
-  console.log(user, "this is the new user");
+  console.log("this is the user who THINKS she is an admin", user);
   const scopes = permissions.get(user.accessLevel);
   console.log(scopes, user.accessLevel, "prem.scop");
   if (scopes.ADMIN) {
     return next();
   }
-  return next(ErrorHandler.notAllowed());
+  res.send(ErrorHandler.notAllowed());
 };
 
 module.exports = adminMiddleware;
