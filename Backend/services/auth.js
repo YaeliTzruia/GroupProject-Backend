@@ -23,7 +23,7 @@ const generateToken = (userId) => {
     },
     SECRET
   );
-  console.log("generate token:", token)
+  console.log("generate token:", token);
   return token;
 
   // const data = {

@@ -6,7 +6,7 @@ const hash = (value) => {
   return bcrypt.hashSync(value, saltRounds);
 };
 
-const check = (value, hashed) => {
+const check = (value, hashed, res) => {
   return bcrypt.compareSync(value, hashed);
 };
 
