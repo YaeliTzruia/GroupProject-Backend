@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("dotenv").config();
 const User = require("../models/User");
 const secret = process.env.JWT_SECRET;
-const ErrorHandler = require("../lib/errorHandling.lib")
+const ErrorHandler = require("../lib/errorHandling.lib");
 
 const authCheck = (req, res, next) => {
   console.log(req.cookies.JWT, "JWT");
@@ -25,6 +25,8 @@ const authCheck = (req, res, next) => {
       }
     });
   }
+
+  res.send(ErrorHandler.needLogin());
 
   res.send({ status: "Error", message: "No JWT was found" });
   next("No JWT was found");
