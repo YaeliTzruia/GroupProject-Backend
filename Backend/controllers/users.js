@@ -2,8 +2,8 @@ const usersService = require("../services/users");
 
 const getMe = async (req, res) => {
   try {
-    const me = await usersService.getById(req.user.userId);
-    res.send(me);
+    const me = req.user.toProfileJSON();
+    res.send({"status": "success", me});
   } catch (err) {
     console.log(err);
     return err;
@@ -13,7 +13,7 @@ const getMe = async (req, res) => {
 const getById = async (req, res) => {
   try {
     const user = await usersService.getById(req.params.userId);
-    res.send({status: "success", user: user});
+    res.send({ status: "success", user: user });
   } catch (err) {
     console.log(err);
     return err;

@@ -10,7 +10,7 @@ const authController = require("../controllers/auth");
 const authCheck = require("../middlewares/authCheck");
 
 route.get("/me", authCheck, usersController.getMe);
-route.get("/:userId", usersController.getById);
+route.get("/:userId", authCheck, usersController.getById);
 route.post("/register", validator(registerUserSchema), authController.register);
 route.post("/login", validator(loginUserSchema), authController.login);
 
