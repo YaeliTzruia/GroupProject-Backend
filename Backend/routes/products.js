@@ -9,6 +9,7 @@ const SearchController = require("../controllers/search");
 
 route.get("/", ProductController.getAllProducts);
 route.get("/search/limit", SearchController.searchLimit);
+route.get("/search/allData", SearchController.searchAll);
 route.get("/:productId", checkProduct, ProductController.getProductById);
 route.put("/:productId", checkProduct, ProductController.updateProduct);
 route.use(adminCheck);
