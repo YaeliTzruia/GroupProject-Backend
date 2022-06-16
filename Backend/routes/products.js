@@ -1,12 +1,15 @@
 const express = require("express");
 const route = express.Router();
-const ProductController = require("../controllers/products");
+
 const validator = require("../DTO/validator");
 const productSchema = require("../DTO/productInfoValidation/productSchema");
+
+const SearchController = require("../controllers/search");
+const ProductController = require("../controllers/products");
+
 const checkProduct = require("../middlewares/checkProduct");
 const adminCheck = require("../middlewares/adminCheck");
 const authCheck = require("../middlewares/authCheck")
-const SearchController = require("../controllers/search");
 
 route.get("/", ProductController.getAllProducts);
 route.get("/search/limit", SearchController.searchLimit);

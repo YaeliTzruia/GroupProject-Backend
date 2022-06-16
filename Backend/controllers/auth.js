@@ -8,42 +8,37 @@ const User = require("../models/User");
 const register = async (req, res, next) => {
   res.clearCookie("JWT");
   const newuser = { ...req.body };
-  console.log(newuser, "new user");
   delete newuser.passwordConfirmation;
   const hashed = authService.generateHash(newuser.password);
   const user = new User({ ...req.body, password: hashed });
 
   try {
     await user.save();
-    delete user.password;
+    //delete user.password;
     const token = authService.generateToken(user._id);
     res.cookie("JWT", token, cookieSettings);
-    res.json({ user, token });
+    res.json({ status: "success", user, token });
   } catch (err) {
     console.log(err);
-    res.send(ErrorHandler.userAlreadyExists());
-    next(ErrorHandler.userAlreadyExists());
+    res.status(409).send(ErrorHandler.userAlreadyExists());
   }
 };
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-
   try {
     const user = await usersService.findByEmail(email);
     const isValid = authService.validateHash(password, user.password);
     if (!isValid) {
-      res.send({ status: "Error", message: "Password incorrect" });
+      res.status(403).send(ErrorHandler.IncorrectPassword());
     } else if (isValid) {
       const token = authService.generateToken(user._id);
       res.cookie("JWT", token, cookieSettings);
       res.json({ status: "success", message: "Logged in", user, token });
     }
   } catch (err) {
-    res.send(ErrorHandler.userNotFound());
+    res.status(404).send(ErrorHandler.noUser());
   }
-
-  // next(ErrorHandler.LoginFailed());
 };
 
 module.exports = { register, login };

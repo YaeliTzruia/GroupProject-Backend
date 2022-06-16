@@ -11,20 +11,17 @@ const authCheck = (req, res, next) => {
       try {
         const thisUser = await User.findById(decoded.id);
         if (!thisUser) {
-          res.send(ErrorHandler.tokenNotFound());
+          res.status(404).send(ErrorHandler.tokenNotFound());
         }
         req.user = thisUser;
         return next();
       } catch (err) {
-        res.send(ErrorHandler.invalidToken());
+        res.status(404).send(ErrorHandler.invalidToken());
       }
     });
   }
 
-  res.send(ErrorHandler.needLogin());
-
-  res.send({ status: "Error", message: "No JWT was found" });
-  next("No JWT was found");
+  res.status(401).send(ErrorHandler.needLogin());
 };
 
 module.exports = authCheck;
