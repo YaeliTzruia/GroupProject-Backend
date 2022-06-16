@@ -9,7 +9,7 @@ const adminMiddleware = (req, res, next) => {
   if (scopes.ADMIN) {
     return next();
   }
-  res.send(ErrorHandler.notAllowed());
+  res.status(405).send(ErrorHandler.notAllowed());
 };
 
 module.exports = adminMiddleware;

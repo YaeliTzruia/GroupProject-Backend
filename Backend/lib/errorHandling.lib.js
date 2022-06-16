@@ -9,13 +9,16 @@ class ErrorHandler {
 
   static tokenNotFound = () =>
     new ErrorHandler(404, "No user exists with this token");
+
   static invalidToken = () =>
     new ErrorHandler(404, "The token you have provided is invalid");
 
-  static userAlreadyExists = () => new ErrorHandler(409, "User Already Exists");
+  static userAlreadyExists = () => new ErrorHandler(409, "User Already Exists with this email");
 
   static LoginFailed = () => new ErrorHandler(403, "Login Failed");
 
+
+  static IncorrectPassword = () => new ErrorHandler(403, "Incorrect Password");
   static tokenExpired = () => new ErrorHandler(403, "Token is Expired");
 
   static internalError = (msg) =>
@@ -32,6 +35,8 @@ class ErrorHandler {
 
   static noProduct = () =>
     new ErrorHandler(404, "No product matching this id found");
+
+  static noUser = () => new ErrorHandler(404, "No user matching this id found");
 }
 
 module.exports = ErrorHandler;

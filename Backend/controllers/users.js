@@ -25,11 +25,10 @@ const addNewUser = async (req, res) => {
     const obj = {
       ...req.body,
     };
-    const newUserId = usersService.add(obj);
-    console.log("user Added!");
+    const newUserObj = usersService.add(obj);
     res.send({
       status: "success",
-      message: `A new user has been created with this information: ${newUserId}`,
+      message: `A new user has been created with this information: ${newUserObj}`,
     });
   } catch (err) {
     console.log(err);
@@ -37,12 +36,17 @@ const addNewUser = async (req, res) => {
   }
 };
 
+const logout = (req, res) => {
+  res.clearCookie("JWT");
+  res.json({ status: "success", message: "Logged out" });
+};
+
 const updateUser = async (req, res) => {
   try {
     const id = req.params.userId;
     const item = req.body;
     await usersService.update(id, item);
-    res.send({ status: "success", message: "User Updated", "new info": item });
+    res.send({ status: "success", message: "User Updated", "updated info": item });
   } catch (err) {
     console.log(err);
     return err;
@@ -54,4 +58,5 @@ module.exports = {
   getById,
   addNewUser,
   updateUser,
+  logout,
 };
