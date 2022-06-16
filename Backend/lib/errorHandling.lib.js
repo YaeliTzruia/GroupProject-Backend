@@ -37,6 +37,8 @@ class ErrorHandler {
     new ErrorHandler(404, "No product matching this id found");
 
   static noUser = () => new ErrorHandler(404, "No user matching this id found");
+
+  static noUserWithEmail = () => new ErrorHandler(404, "No user matching this email found");
 }
 
 module.exports = ErrorHandler;

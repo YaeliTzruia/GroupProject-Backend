@@ -17,7 +17,6 @@ route.get("/logout", usersController.logout);
 route.get("/:userId", authCheck, userCheck, usersController.getById);
 route.post("/register", validator(registerUserSchema), authController.register);
 route.post("/login", validator(loginUserSchema), authController.login);
-
 route.put(
   "/:userId",
   authCheck,

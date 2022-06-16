@@ -37,7 +37,7 @@ const login = async (req, res) => {
       res.json({ status: "success", message: "Logged in", user, token });
     }
   } catch (err) {
-    res.status(404).send(ErrorHandler.noUser());
+    res.status(404).send(ErrorHandler.noUserWithEmail());
   }
 };
 
