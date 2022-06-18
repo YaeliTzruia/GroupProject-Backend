@@ -2,7 +2,8 @@ const User = require("../models/User");
 
 const findByEmail = async (email) => {
   try {
-    const findUser = await User.findOne({ email });
+    const findUser = await User.findOne({ email: email }).populate("savedCart");
+    console.log(findUser);
     if (!findUser) return "Email not found";
     return findUser;
   } catch (err) {
