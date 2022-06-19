@@ -12,6 +12,7 @@ const ProductSchema = new mongoose.Schema(
       required: true,
     },
     price: { type: Number, required: true },
+    salePrice: { type: Number },
     quantity: { type: Number, required: true },
     description: { type: String },
     allergens: [{ type: String }],

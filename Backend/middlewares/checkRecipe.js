@@ -6,10 +6,10 @@ const recipeCheck = async (req, res, next) => {
     const recipe = await Recipe.findById(req.params.recipeId);
     console.log("recipe check recipe in try block", recipe);
     if (recipe != null) return next();
-    res.send(ErrorHandler.noRecipe());
+    res.status(404).send(ErrorHandler.noRecipe());
   } catch {
     console.log("recipe check recipe in catch block");
-    res.send(ErrorHandler.noRecipe());
+    res.status(404).send(ErrorHandler.noRecipe());
   }
 };
 
