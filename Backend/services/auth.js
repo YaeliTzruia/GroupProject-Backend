@@ -1,5 +1,5 @@
 const hashLib = require("../lib/hash.lib");
-const jwtLib = require("../lib/jwt.lib");
+//const jwtLib = require("../lib/jwt.lib");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const SECRET = process.env.JWT_SECRET;
