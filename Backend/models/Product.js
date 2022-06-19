@@ -5,6 +5,7 @@ const ProductSchema = new mongoose.Schema(
     name: { type: String, required: true },
     variety: { type: String },
     category: { type: String, required: true },
+    subcategory: { type: String },
     size: { type: String, required: true },
     brand: {
       type: String,
@@ -12,7 +13,8 @@ const ProductSchema = new mongoose.Schema(
     },
     price: { type: String, required: true },
     quantity: { type: Number, required: true },
-    allergens: [{ type: String, required: true }],
+    description: { type: String },
+    allergens: [{ type: String }],
     keywords: [{ type: String, required: true }],
   },
   {
@@ -29,6 +31,7 @@ ProductSchema.methods.toProductDetailsJSON = function () {
     brand: this.brand,
     price: this.price,
     quantity: this.quantity,
+    description: this.description,
     allergens: this.allergens,
     keywords: this.keywords,
   };

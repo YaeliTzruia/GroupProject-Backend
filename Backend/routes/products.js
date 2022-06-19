@@ -13,6 +13,7 @@ const authCheck = require("../middlewares/authCheck")
 
 route.get("/", ProductController.getAllProducts);
 route.get("/search/limit", SearchController.searchLimit);
+route.get("/search/allData", SearchController.searchAll);
 route.get("/:productId", checkProduct, ProductController.getProductById);
 route.put("/:productId", authCheck, adminCheck, checkProduct, ProductController.updateProduct);
 route.post("/", authCheck, adminCheck, validator(productSchema), ProductController.addNewProduct);
