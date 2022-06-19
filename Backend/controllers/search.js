@@ -28,4 +28,15 @@ const searchAll = async (req, res) => {
   }
 };
 
-module.exports = { searchLimit, searchAll };
+const subcategorys = async (req, res) => {
+  const subcategory = req.params.subcategory;
+  try {
+    const product = await Product.find({ subcategory });
+    res.send({ status: "success", products: product });
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
+module.exports = { searchLimit, searchAll, subcategorys };
