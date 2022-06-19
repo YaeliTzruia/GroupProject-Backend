@@ -20,6 +20,18 @@ const getById = async (req, res) => {
   }
 };
 
+
+const getPurchaseDetailsByUser = async (req, res) => {
+  try {
+    const user = await usersService.getById(req.params.userId);
+    const purchases = await user.purchases; 
+    res.send({ status: "success", name: `${user.firstName} ${user.lastName}`, pastPurchases: purchases });
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
 const addNewUser = async (req, res) => {
   try {
     const obj = {
@@ -59,4 +71,5 @@ module.exports = {
   addNewUser,
   updateUser,
   logout,
+  getPurchaseDetailsByUser, 
 };
