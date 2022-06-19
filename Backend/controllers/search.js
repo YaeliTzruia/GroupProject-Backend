@@ -2,7 +2,7 @@ const Product = require("../models/Product");
 
 const searchLimit = async (req, res) => {
   try {
-    console.log("req query", req.query)
+    console.log("req query", req.query);
     const { keywords } = req.query;
     lowerKeywords = keywords.toLowerCase();
     Product.findAll(
@@ -30,9 +30,11 @@ const searchAll = async (req, res) => {
 };
 
 const subcategories = async (req, res) => {
-  const subcategory = req.params.subcategory;
+  console.log("req.query", req.query);
+  const searchSubcategory = req.query.subcategory;
+  console.log("subcategory", searchSubcategory);
   try {
-    const product = await Product.find({ subcategory });
+    const product = await Product.find({ subcategory: searchSubcategory });
     res.send({ status: "success", products: product });
   } catch (err) {
     console.log(err);
