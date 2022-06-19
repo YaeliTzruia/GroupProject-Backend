@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const Purchase = require("./Purchase")
+const Product = require("./Product")
 
 const UserSchema = new mongoose.Schema(
   {
