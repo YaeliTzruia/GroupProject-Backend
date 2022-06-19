@@ -18,7 +18,8 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     accessLevel: { type: String, default: "0", enum: ["0", "1", "2", "3"] },
     purchases: [{ type: mongoose.Schema.Types.ObjectId, ref: "Purchase" }],
-    savedCart: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+    savedCart: [{ product: {type: mongoose.Schema.Types.ObjectId, ref: "Product" }, quantity: Number}],
+
   },
   {
     timestamps: true,
