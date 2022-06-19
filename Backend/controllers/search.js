@@ -28,7 +28,7 @@ const searchAll = async (req, res) => {
   }
 };
 
-const subcategorys = async (req, res) => {
+const subcategories = async (req, res) => {
   const subcategory = req.params.subcategory;
   try {
     const product = await Product.find({ subcategory });
@@ -39,4 +39,4 @@ const subcategorys = async (req, res) => {
   }
 };
 
-module.exports = { searchLimit, searchAll, subcategorys };
+module.exports = { searchLimit, searchAll, subcategories };
