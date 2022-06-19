@@ -6,6 +6,7 @@ const authController = require("../controllers/auth");
 const purchaseController = require("../controllers/purchases");
 
 const validator = require("../DTO/validator");
+
 const registerUserSchema = require("../DTO/usersInfoValidation/registerUserSchema");
 const loginUserSchema = require("../DTO/usersInfoValidation/loginUserSchema");
 const updateUserSchema = require("../DTO/usersInfoValidation/updateUserSchema");
