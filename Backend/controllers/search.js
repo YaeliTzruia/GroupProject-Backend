@@ -31,10 +31,14 @@ const searchAll = async (req, res) => {
 
 const subcategories = async (req, res) => {
   console.log("req.query", req.query);
-  const searchSubcategory = req.query.subcategory;
+  const searchKeys = Object.keys(req.query)
+  const searchValues = Object.values(req.query)
+  console.log("keys", searchKeys, "values", searchValues)
+  const searchSubcategory = searchKeys[0];
+  const searchValue = searchValues[0];
   console.log("subcategory", searchSubcategory);
   try {
-    const product = await Product.find({ subcategory: searchSubcategory });
+    const product = await Product.find({searchSubcategory: searchValue });
     res.send({ status: "success", products: product });
   } catch (err) {
     console.log(err);
