@@ -10,7 +10,7 @@ const productSchema = Yup.object({
   price: Yup.number().required("price required"),
   quantity: Yup.number().required("quantity required"),
   description: Yup.string(),
-  allergens: Yup.array().min(1, "enter at least one allergen"),
+  allergens: Yup.array(),
   // .required("allergens required"),
   keywords: Yup.array()
     .min(1, "enter at least one keyword")

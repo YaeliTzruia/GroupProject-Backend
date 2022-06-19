@@ -44,6 +44,5 @@ route.delete(
   checkProduct,
   ProductController.deleteProduct
 );
->>>>>>> 088ea1cb76015529b72cfc93f374e24d181c9595
 
 module.exports = route;
