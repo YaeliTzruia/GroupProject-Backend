@@ -28,7 +28,7 @@ route.post("/register", validator(registerUserSchema), authController.register);
 route.post(
   "/makeapurchase",
   authCheck,
-  //validator(purchaseSchema),
+  // validator(purchaseSchema),
   purchaseController.makeAPurchase
 );
 route.post("/login", validator(loginUserSchema), authController.login);

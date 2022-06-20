@@ -2,8 +2,9 @@ const usersService = require("../services/users");
 
 const getMe = async (req, res) => {
   try {
+    const id = req.user._id;
     const me = req.user.toProfileJSON();
-    res.send({ status: "success", me });
+    res.send({ status: "success", me, id });
   } catch (err) {
     console.log(err);
     return err;
@@ -20,12 +21,15 @@ const getById = async (req, res) => {
   }
 };
 
-
 const getPurchaseDetailsByUser = async (req, res) => {
   try {
     const user = await usersService.getById(req.params.userId);
-    const purchases = await user.purchases; 
-    res.send({ status: "success", name: `${user.firstName} ${user.lastName}`, pastPurchases: purchases });
+    const purchases = await user.purchases;
+    res.send({
+      status: "success",
+      name: `${user.firstName} ${user.lastName}`,
+      pastPurchases: purchases,
+    });
   } catch (err) {
     console.log(err);
     return err;
@@ -71,5 +75,5 @@ module.exports = {
   addNewUser,
   updateUser,
   logout,
-  getPurchaseDetailsByUser, 
+  getPurchaseDetailsByUser,
 };

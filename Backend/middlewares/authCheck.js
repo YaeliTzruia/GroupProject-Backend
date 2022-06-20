@@ -4,13 +4,14 @@ const User = require("../models/User");
 const secret = process.env.JWT_SECRET;
 const ErrorHandler = require("../lib/errorHandling.lib");
 
-const authCheck = (req, res, next) => {
+const authCheck = async (req, res, next) => {
   console.log(req.cookies.JWT, "JWT");
   if (req.cookies.JWT) {
     return jwt.verify(req.cookies.JWT, secret, async (err, decoded) => {
       try {
-
-        const thisUser = await User.findById(decoded.id).populate("savedCart purchases");
+        const thisUser = await User.findById(decoded.id).populate(
+          "savedCart purchases"
+        );
 
         if (!thisUser) {
           res.status(404).send(ErrorHandler.tokenNotFound());

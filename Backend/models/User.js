@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const Purchase = require("./Purchase")
-const Product = require("./Product")
+const Purchase = require("./Purchase");
+const Product = require("./Product");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -18,8 +18,12 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     accessLevel: { type: String, default: "0", enum: ["0", "1", "2", "3"] },
     purchases: [{ type: mongoose.Schema.Types.ObjectId, ref: "Purchase" }],
-    savedCart: [{ product: {type: mongoose.Schema.Types.ObjectId, ref: "Product" }, quantity: Number}],
-
+    savedCart: [
+      {
+        product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+        quantity: { type: Number },
+      },
+    ],
   },
   {
     timestamps: true,
