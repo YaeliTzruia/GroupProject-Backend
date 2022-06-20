@@ -40,7 +40,11 @@ const subcategories = async (req, res) => {
   query[searchSubcategory] = searchValue;
   try {
     const product = await Product.find(query);
-
+    console.log("products", product);
+    if (product.length === 0)
+      res
+        .status(404)
+        .send({ status: "error", msg: "no products match this query" });
     res.send({ status: "success", products: product });
   } catch (err) {
     console.log(err);
