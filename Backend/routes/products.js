@@ -16,7 +16,7 @@ route.get("/", ProductController.getAllProducts);
 route.get("/search/limit", SearchController.searchLimit);
 route.get("/search/allData", SearchController.searchAll);
 route.get("/search", SearchController.subcategories);
-route.get("/keywordsearch", SearchController.subcategories);
+route.post("/keywordsearch", SearchController.keywordSearch);
 route.get("/search/:subcategory", SearchController.subcategories);
 
 route.get("/:productId", checkProduct, ProductController.getProductById);
