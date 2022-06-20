@@ -1,7 +1,3 @@
-const jwt = require("jsonwebtoken");
-const config = require("dotenv").config();
-const User = require("../models/User");
-const secret = process.env.JWT_SECRET;
 const ErrorHandler = require("../lib/errorHandling.lib");
 const purchaseService = require("../services/purchases");
 
