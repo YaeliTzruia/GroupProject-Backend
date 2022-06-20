@@ -3,7 +3,10 @@ const User = require("../models/User");
 const findByEmail = async (email) => {
   try {
 
-    const findUser = await User.findOne({ email: email }).populate("savedCart purchases");
+    const findUser = await User.findOne({ email: email }).populate({
+      path: "savedCart.product",
+      model: "Product",
+    });
     console.log(findUser);
 
     if (!findUser) return "Email not found";
