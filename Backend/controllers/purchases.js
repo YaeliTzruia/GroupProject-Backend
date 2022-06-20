@@ -7,6 +7,7 @@ const makeAPurchase = async (req, res) => {
       customer: req.user._id.toString(),
       paymentMethod: req.body.paymentMethod,
       items: [...req.body.items],
+      total: req.body.total,
     };
     const newPurchaseObj = await purchaseService.addPurchase(purchase);
     res.send({

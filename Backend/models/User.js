@@ -39,6 +39,8 @@ UserSchema.methods.toProfileJSON = function () {
     accessLevel: this.accessLevel,
     purchases: this.purchases,
     savedCart: this.savedCart,
+    createdAt: this.createdAt,
+    updatedAt: this.updatedAt,
   };
 };
 

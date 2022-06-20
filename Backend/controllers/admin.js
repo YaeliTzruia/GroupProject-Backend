@@ -11,6 +11,16 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const getAllPurchases = async (req, res) => {
+  try {
+    const allPurchases = await adminService.getAllPurchasesData();
+    res.json({ status: "success", allPurchases });
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
 const delUser = async (req, res) => {
   try {
     const user = await usersService.getById(req.params.userId);
@@ -28,4 +38,5 @@ const delUser = async (req, res) => {
 module.exports = {
   getAllUsers,
   delUser,
+  getAllPurchases,
 };

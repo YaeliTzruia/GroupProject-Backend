@@ -1,3 +1,4 @@
+const ErrorHandler = require("../lib/errorHandling.lib");
 const Product = require("../models/Product");
 
 const searchLimit = async (req, res) => {
@@ -41,10 +42,7 @@ const subcategories = async (req, res) => {
   try {
     const product = await Product.find(query);
     console.log("products", product);
-    if (product.length === 0)
-      res
-        .status(404)
-        .send({ status: "error", msg: "no products match this query" });
+    if (product.length === 0) res.status(404).send(ErrorHandler.noProducts());
     res.send({ status: "success", products: product });
   } catch (err) {
     console.log(err);
@@ -52,4 +50,17 @@ const subcategories = async (req, res) => {
   }
 };
 
-module.exports = { searchLimit, searchAll, subcategories };
+const keywordSearch = async (req, res) => {
+  const keyword = req.body.keyword;
+  console.log("keyword", keyword);
+  try {
+    const product = await Product.find({ keywords: keyword });
+    if (product.length === 0) res.status(404).send(ErrorHandler.noProducts());
+    res.send({ status: "success", products: product });
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
+module.exports = { searchLimit, searchAll, subcategories, keywordSearch };
