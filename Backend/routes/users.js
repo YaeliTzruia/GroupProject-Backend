@@ -3,7 +3,7 @@ const route = express.Router();
 
 const usersController = require("../controllers/users");
 const authController = require("../controllers/auth");
-const purchaseController = require("../controllers/purchases");
+// const purchaseController = require("../controllers/purchases");
 
 const validator = require("../DTO/validator");
 
