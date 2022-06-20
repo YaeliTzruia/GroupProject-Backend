@@ -1,3 +1,4 @@
+const ErrorHandler = require("../lib/errorHandling.lib");
 const Product = require("../models/Product");
 
 const searchLimit = async (req, res) => {
@@ -44,7 +45,7 @@ const subcategories = async (req, res) => {
     if (product.length === 0)
       res
         .status(404)
-        .send({ status: "error", msg: "no products match this query" });
+        .send(ErrorHandler.noProducts());
     res.send({ status: "success", products: product });
   } catch (err) {
     console.log(err);
