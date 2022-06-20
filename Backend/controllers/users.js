@@ -3,8 +3,9 @@ const usersService = require("../services/users");
 const getMe = async (req, res) => {
   try {
     const id = req.user._id;
-    const me = req.user.toProfileJSON();
-    res.send({ status: "success", me, id });
+    const user = req.user.toProfileJSON();
+    const me = {...user, id}
+    res.send({ status: "success", me});
   } catch (err) {
     console.log(err);
     return err;
