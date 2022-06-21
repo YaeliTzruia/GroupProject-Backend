@@ -39,7 +39,7 @@ const add = async (NewUser) => {
 
 const update = async (id, item) => {
   try {
-    const users = await User.findByIdAndUpdate(id, item);
+    const users = await User.findByIdAndUpdate(id, item, {new: true});
     await users.save();
     return users;
   } catch (err) {
@@ -50,8 +50,7 @@ const update = async (id, item) => {
 
 const updatePurchases = async (userId, purchaseId) => {
   try {
-    const users = await User.findByIdAndUpdate(userId,    { $addToSet: { purchases: purchaseId } }
-    );
+    const users = await User.findByIdAndUpdate(userId, { $addToSet: { purchases: purchaseId }})
     await users.save();
     return users;
   } catch (err) {
