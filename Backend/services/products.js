@@ -22,7 +22,7 @@ const getProductById = async (id) => {
 
 const updateProduct = async (id, item) => {
   try {
-    const product = await Product.findByIdAndUpdate(id, item);
+    const product = await Product.findByIdAndUpdate(id, item, {new: true});
     return product;
   } catch (err) {
     console.log(err);
