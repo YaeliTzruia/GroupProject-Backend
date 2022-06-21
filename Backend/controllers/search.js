@@ -40,8 +40,9 @@ const subcategories = async (req, res) => {
   var query = {};
   query[searchSubcategory] = searchValue;
   try {
-    const product = await Product.find(query);
-    console.log("products", product);
+    //const product = await Product.find(query);
+    const product = await Product.find(query).sort({createdAt: -1});
+    //console.log("products", product);
     if (product.length === 0) res.status(404).send(ErrorHandler.noProducts());
     res.send({ status: "success", products: product });
   } catch (err) {
