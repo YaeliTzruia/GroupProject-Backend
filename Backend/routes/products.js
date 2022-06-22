@@ -12,7 +12,7 @@ const adminCheck = require("../middlewares/adminCheck");
 const authCheck = require("../middlewares/authCheck");
 
 route.get("/", ProductController.getAllProducts);
-route.get("/search/limit", SearchController.searchLimit);
+route.get("/search/limit/:keywords", SearchController.searchLimit);
 route.get("/search/allData", SearchController.searchAll);
 route.get("/search", SearchController.subcategories);
 route.get("/search/:subcategory", SearchController.subcategories);

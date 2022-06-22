@@ -3,13 +3,12 @@ const Product = require("../models/Product");
 const searchLimit = async (req, res) => {
   try {
     console.log("req query", req.query);
-    const { keywords } = req.query;
-    lowerKeywords = keywords.toLowerCase();
-    Product.findAll(
-      { where: { keywords: { [Op.like]: "%" + term + "%" } } },
-      { limit: 5 }
-    )
-      .then((output) => res.send("search result", { output }))
+    const { keywords } = req.params;
+    const lowerKeywords = keywords.toLowerCase();
+    Product.find({ keywords: { $all: lowerKeywords.split("+") } })
+      .limit(5)
+      .select("name photoURL subcategory")
+      .then((output) => res.json(output))
       .catch((error) => console.log(error));
   } catch (err) {
     console.log(err);
