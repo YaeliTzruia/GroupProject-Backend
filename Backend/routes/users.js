@@ -3,7 +3,7 @@ const route = express.Router();
 
 const usersController = require("../controllers/users");
 const authController = require("../controllers/auth");
-const purchaseController = require("../controllers/purchases");
+// const purchaseController = require("../controllers/purchases");
 
 const validator = require("../DTO/validator");
 
@@ -14,6 +14,7 @@ const purchaseSchema = require("../DTO/purchasesValidation/purchaseSchema");
 
 const authCheck = require("../middlewares/authCheck");
 const userCheck = require("../middlewares/userCheck");
+const makeAPurchase = require("../middlewares/makePurchase")
 
 route.get("/me", authCheck, usersController.getMe);
 route.get("/logout", usersController.logout);
@@ -23,14 +24,9 @@ route.get(
   userCheck,
   usersController.getPurchaseDetailsByUser
 );
+route.post("/:userId/makeapurchase", authCheck, makeAPurchase, usersController.updateUserPurchases);
 route.get("/:userId", authCheck, userCheck, usersController.getById);
 route.post("/register", validator(registerUserSchema), authController.register);
-route.post(
-  "/makeapurchase",
-  authCheck,
-  // validator(purchaseSchema),
-  purchaseController.makeAPurchase
-);
 route.post("/login", validator(loginUserSchema), authController.login);
 route.put(
   "/:userId",

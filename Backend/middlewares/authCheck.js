@@ -9,11 +9,19 @@ const authCheck = async (req, res, next) => {
   if (req.cookies.JWT) {
     return jwt.verify(req.cookies.JWT, secret, async (err, decoded) => {
       try {
-        const thisUser = await User.findById(decoded.id).populate({
-          path: "savedCart.product",
-          model: "Product",
-        });
-
+        // const thisUser = await User.findById(decoded.id).populate(
+        //   {
+        //     path: "savedCart.product",
+        //     model: "Product",
+        //   },
+        //   purchases
+        // );
+        const thisUser = await User.findById(decoded.id)
+          .populate("purchases")
+          .populate({
+            path: "savedCart.product",
+            model: "Product",
+          });
         if (!thisUser) {
           res.status(404).send(ErrorHandler.tokenNotFound());
         }

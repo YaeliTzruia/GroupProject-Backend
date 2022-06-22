@@ -2,7 +2,7 @@ const Product = require("../models/Product");
 
 const getAllProducts = async () => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().sort({createdAt: -1});
     return products;
   } catch (err) {
     console.log(err);
@@ -22,7 +22,7 @@ const getProductById = async (id) => {
 
 const updateProduct = async (id, item) => {
   try {
-    const product = await Product.findByIdAndUpdate(id, item);
+    const product = await Product.findByIdAndUpdate(id, item, {new: true});
     return product;
   } catch (err) {
     console.log(err);
