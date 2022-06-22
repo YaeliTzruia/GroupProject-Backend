@@ -17,6 +17,7 @@ const ProductSchema = new mongoose.Schema(
     description: { type: String },
     allergens: [{ type: String }],
     keywords: [{ type: String, required: true }],
+    photoURL: [{ type: String }],
   },
   {
     timestamps: true,
