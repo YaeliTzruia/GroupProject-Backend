@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema(
       },*/
     },
     password: { type: String, required: true },
+    photo: { type: String },
     accessLevel: { type: String, default: "0", enum: ["0", "1", "2", "3"] },
     purchases: [{ type: mongoose.Schema.Types.ObjectId, ref: "Purchase" }],
     savedCart: [
@@ -39,6 +40,8 @@ UserSchema.methods.toProfileJSON = function () {
     accessLevel: this.accessLevel,
     purchases: this.purchases,
     savedCart: this.savedCart,
+    createdAt: this.createdAt,
+    updatedAt: this.updatedAt,
   };
 };
 

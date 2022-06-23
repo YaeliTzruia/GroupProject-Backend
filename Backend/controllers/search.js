@@ -14,7 +14,9 @@ const searchLimit = async (req, res) => {
 
       // { $all: lowerKeywords.split("+") }
       .limit(5)
-      .select("name photoURL subcategory")
+      .select(
+        "name photoURL subcategory variety category size brand price allergens keywords"
+      )
       .then((output) => res.json(output))
       .catch((error) => console.log(error));
     console.log(string, "string");

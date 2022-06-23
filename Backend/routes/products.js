@@ -12,16 +12,19 @@ const adminCheck = require("../middlewares/adminCheck");
 const authCheck = require("../middlewares/authCheck");
 
 route.get("/", ProductController.getAllProducts);
+route.get(
+  "/recentlyadded",
+  /*authCheck, adminCheck,*/ SearchController.recentlyAdded
+);
 route.get("/search/limit/:keywords", SearchController.searchLimit);
+
 route.get("/search/allData", SearchController.searchAll);
 route.get("/search", SearchController.subcategories);
+route.post("/keywordsearch", SearchController.keywordSearch);
 route.get("/search/:subcategory", SearchController.subcategories);
+
 route.get("/:productId", checkProduct, ProductController.getProductById);
-route.put("/:productId", checkProduct, ProductController.updateProduct);
-route.use(adminCheck);
-route.post("/", validator(productSchema), ProductController.addNewProduct);
-route.delete("/:productId", checkProduct, ProductController.deleteProduct);
-route.get("/:productId", checkProduct, ProductController.getProductById);
+
 route.put(
   "/:productId",
   authCheck,

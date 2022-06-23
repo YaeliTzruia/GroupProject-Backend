@@ -4,8 +4,8 @@ const getMe = async (req, res) => {
   try {
     const id = req.user._id;
     const user = req.user.toProfileJSON();
-    const me = {...user, id}
-    res.send({ status: "success", me});
+    const me = { ...user, id };
+    res.send({ status: "success", me });
   } catch (err) {
     console.log(err);
     return err;
@@ -70,6 +70,22 @@ const updateUser = async (req, res) => {
   }
 };
 
+const updateUserPurchases = async (req, res) => {
+  try {
+    const id = req.user._id;
+    const updatedUser = await usersService.updatePurchases(id, req.purchaseId);
+    console.log("updated users", updatedUser);
+    res.send({
+      status: "success",
+      message: "User Purchase Updated",
+      updatedInfo: updatedUser,
+    });
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
 module.exports = {
   getMe,
   getById,
@@ -77,4 +93,5 @@ module.exports = {
   updateUser,
   logout,
   getPurchaseDetailsByUser,
+  updateUserPurchases,
 };

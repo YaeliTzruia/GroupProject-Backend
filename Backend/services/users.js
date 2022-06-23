@@ -2,11 +2,26 @@ const User = require("../models/User");
 
 const findByEmail = async (email) => {
   try {
-
-    const findUser = await User.findOne({ email: email }).populate({
-      path: "savedCart.product",
-      model: "Product",
-    });
+    // const findUser = await User.findOne({ email: email }).populate({
+    //   path: "savedCart.product",
+    //   model: "Product",
+    // }, purchases);
+    const findUser = await User.findOne({ email: email })
+      .populate("purchases")
+      .populate({
+        path: "purchases",
+        populate: {
+          path: "items",
+          populate: {
+            path: "product",
+            model: "Product",
+          },
+        },
+      })
+      .populate({
+        path: "savedCart.product",
+        model: "Product",
+      });
     console.log(findUser);
 
     if (!findUser) return "Email not found";
@@ -18,7 +33,22 @@ const findByEmail = async (email) => {
 
 const getById = async (id) => {
   try {
-    const user = await User.findById(id).populate("savedCart purchases");
+    const user = await User.findById(id)
+      .populate("purchases")
+      .populate({
+        path: "purchases",
+        populate: {
+          path: "items",
+          populate: {
+            path: "product",
+            model: "Product",
+          },
+        },
+      })
+      .populate({
+        path: "savedCart.product",
+        model: "Product",
+      });
     return user;
   } catch (err) {
     console.log(err);
@@ -40,7 +70,57 @@ const add = async (NewUser) => {
 
 const update = async (id, item) => {
   try {
-    const users = await User.findByIdAndUpdate(id, item);
+    const users = await User.findByIdAndUpdate(id, item, { new: true })
+      .populate("purchases")
+      .populate({
+        path: "purchases",
+        populate: {
+          path: "items",
+          populate: {
+            path: "product",
+            model: "Product",
+          },
+        },
+      })
+      .populate({
+        path: "savedCart.product",
+        model: "Product",
+      });
+    await users.save();
+    return users;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
+const updatePurchases = async (userId, purchaseId) => {
+  try {
+    const users = await User.findByIdAndUpdate(
+      userId,
+      {
+        $addToSet: { purchases: purchaseId },
+        savedCart: [],
+      },
+
+      { new: true }
+    )
+      .populate("purchases")
+      .populate({
+        path: "purchases",
+        populate: {
+          path: "items",
+          populate: {
+            path: "product",
+            model: "Product",
+          },
+        },
+      })
+      .populate({
+        path: "savedCart.product",
+        model: "Product",
+      });
+    await users.save();
     return users;
   } catch (err) {
     console.log(err);
@@ -53,4 +133,5 @@ module.exports = {
   getById,
   add,
   update,
+  updatePurchases,
 };

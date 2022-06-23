@@ -2,7 +2,7 @@ const Yup = require("yup");
 
 const registerUserSchema = Yup.object({
   photoURL: Yup.string(),
-  firstName: Yup.string().required("Firs tname is required"),
+  firstName: Yup.string().required("First name is required"),
   lastName: Yup.string().required("Last name is required"),
   phone: Yup.string()
     .required("Phone number is required")
