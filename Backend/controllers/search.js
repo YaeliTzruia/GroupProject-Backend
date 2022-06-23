@@ -6,17 +6,29 @@ const searchLimit = async (req, res) => {
     console.log("req params", req.params);
     const { keywords } = req.params;
     const lowerKeywords = keywords.toLowerCase();
-    const queryString = lowerKeywords.split("+");
-    const string = queryString.toString();
-    Product.find({
-      keywords: { $regex: { $all: queryString } },
-    })
-      // { $all: lowerKeywords.split("+") }
+    const queryArray = lowerKeywords.split("+");
+    console.log(queryArray);
+    const newQueryArray = [];
+    // var replace = "regex\\d;";
+    // var re = new RegExp(replace, "g");
+    for (i = 0; i < queryArray.length; i++) {
+      console.log("i", i)
+      newQueryArray.push(`/${queryArray[i]}/`);
+    }
+//     var regexFromMyArray = new RegExp(queryArray.join("|"), 'gi');
+// console.log("regex from my array", regexFromMyArray)
+    console.log("new query array", newQueryArray);
+    // Product.find({ keywords: { $all: regexFromMyArray } });
+    // const string = queryString.toString();
+    //   keywords: { $regex: { $all: queryString } },
+    // })
+    Product.find({ keywords: { $all: newQueryArray } })
+
       .limit(5)
-      .select("name photoURL subcategory")
+      .select("name photoURL subcategory keywords")
       .then((output) => res.json(output))
       .catch((error) => console.log(error));
-    console.log(string, "string");
+    //console.log(string, "string");
   } catch (err) {
     console.log(err);
     return err;
@@ -46,7 +58,7 @@ const subcategories = async (req, res) => {
   query[searchSubcategory] = searchValue;
   try {
     //const product = await Product.find(query);
-    const product = await Product.find(query).sort({createdAt: -1});
+    const product = await Product.find(query).sort({ createdAt: -1 });
     //console.log("products", product);
     if (product.length === 0) res.status(404).send(ErrorHandler.noProducts());
     res.send({ status: "success", products: product });

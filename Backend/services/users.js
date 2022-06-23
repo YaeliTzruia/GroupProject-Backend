@@ -9,6 +9,16 @@ const findByEmail = async (email) => {
     const findUser = await User.findOne({ email: email })
       .populate("purchases")
       .populate({
+        path: "purchases",
+        populate: {
+          path: "items",
+          populate: {
+            path: "product",
+            model: "Product",
+          },
+        },
+      })
+      .populate({
         path: "savedCart.product",
         model: "Product",
       });
