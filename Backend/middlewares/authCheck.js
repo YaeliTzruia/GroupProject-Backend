@@ -19,6 +19,16 @@ const authCheck = async (req, res, next) => {
         const thisUser = await User.findById(decoded.id)
           .populate("purchases")
           .populate({
+            path: "purchases",
+            populate: {
+              path: "items",
+              populate: {
+                path: "product",
+                model: "Product",
+              },
+            },
+          })
+          .populate({
             path: "savedCart.product",
             model: "Product",
           });
