@@ -21,6 +21,16 @@ const getAllPurchases = async (req, res) => {
   }
 };
 
+const getDailyPurchases = async (req, res) => {
+  try {
+    const todaysPurchases = await adminService.getTodaysPurchases();
+    res.json({ status: "success", todaysPurchases });
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
 const delUser = async (req, res) => {
   try {
     const user = await usersService.getById(req.params.userId);
@@ -39,4 +49,5 @@ module.exports = {
   getAllUsers,
   delUser,
   getAllPurchases,
+  getDailyPurchases,
 };
