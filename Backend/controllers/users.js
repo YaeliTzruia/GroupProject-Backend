@@ -73,12 +73,12 @@ const updateUser = async (req, res) => {
 const updateUserPurchases = async (req, res) => {
   try {
     const id = req.params.userId;
-    const updatedUsers = await usersService.updatePurchases(id, req.purchaseId);
-    console.log("updated users", updatedUsers);
+    const updatedUser = await usersService.updatePurchases(id, req.purchaseId);
+    console.log("updated users", updatedUser);
     res.send({
       status: "success",
       message: "User Purchase Updated",
-      updatedInfo: updatedUsers,
+      updatedInfo: updatedUser,
     });
   } catch (err) {
     console.log(err);
