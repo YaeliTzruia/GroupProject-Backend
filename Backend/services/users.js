@@ -33,7 +33,22 @@ const findByEmail = async (email) => {
 
 const getById = async (id) => {
   try {
-    const user = await User.findById(id).populate("savedCart purchases");
+    const user = await User.findById(id)
+      .populate("purchases")
+      .populate({
+        path: "purchases",
+        populate: {
+          path: "items",
+          populate: {
+            path: "product",
+            model: "Product",
+          },
+        },
+      })
+      .populate({
+        path: "savedCart.product",
+        model: "Product",
+      });
     return user;
   } catch (err) {
     console.log(err);
@@ -55,7 +70,22 @@ const add = async (NewUser) => {
 
 const update = async (id, item) => {
   try {
-    const users = await User.findByIdAndUpdate(id, item, { new: true });
+    const users = await User.findByIdAndUpdate(id, item, { new: true })
+      .populate("purchases")
+      .populate({
+        path: "purchases",
+        populate: {
+          path: "items",
+          populate: {
+            path: "product",
+            model: "Product",
+          },
+        },
+      })
+      .populate({
+        path: "savedCart.product",
+        model: "Product",
+      });
     await users.save();
     return users;
   } catch (err) {
@@ -74,7 +104,22 @@ const updatePurchases = async (userId, purchaseId) => {
       },
 
       { new: true }
-    );
+    )
+      .populate("purchases")
+      .populate({
+        path: "purchases",
+        populate: {
+          path: "items",
+          populate: {
+            path: "product",
+            model: "Product",
+          },
+        },
+      })
+      .populate({
+        path: "savedCart.product",
+        model: "Product",
+      });
     await users.save();
     return users;
   } catch (err) {
