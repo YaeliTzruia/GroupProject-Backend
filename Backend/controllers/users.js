@@ -72,7 +72,7 @@ const updateUser = async (req, res) => {
 
 const updateUserPurchases = async (req, res) => {
   try {
-    const id = req.params.userId;
+    const id = req.user._id;
     const updatedUser = await usersService.updatePurchases(id, req.purchaseId);
     console.log("updated users", updatedUser);
     res.send({

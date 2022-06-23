@@ -24,8 +24,9 @@ route.get(
   userCheck,
   usersController.getPurchaseDetailsByUser
 );
-route.post("/:userId/makeapurchase", authCheck, makeAPurchase, usersController.updateUserPurchases);
+route.post("/makeapurchase", authCheck, makeAPurchase, usersController.updateUserPurchases);
 route.get("/:userId", authCheck, userCheck, usersController.getById);
+route.post("/makeapurchase", authCheck, makeAPurchase, usersController.updateUserPurchases);
 route.post("/register", validator(registerUserSchema), authController.register);
 route.post("/login", validator(loginUserSchema), authController.login);
 route.put(
