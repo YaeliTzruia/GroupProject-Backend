@@ -3,6 +3,8 @@ const purchaseService = require("../services/purchases");
 
 const makePurchase = async (req, res, next) => {
   console.log("req body items", req.body.items);
+ 
+
   try {
     const purchase = {
       customer: req.user._id.toString(),

@@ -66,9 +66,15 @@ const update = async (id, item) => {
 
 const updatePurchases = async (userId, purchaseId) => {
   try {
-    const users = await User.findByIdAndUpdate(userId, {
-      $addToSet: { purchases: purchaseId },
-    });
+    const users = await User.findByIdAndUpdate(
+      userId,
+      {
+        $addToSet: { purchases: purchaseId },
+        savedCart: [],
+      },
+
+      { new: true }
+    );
     await users.save();
     return users;
   } catch (err) {
