@@ -8,8 +8,10 @@ const searchLimit = async (req, res) => {
     const queryString = lowerKeywords.split("+");
     const string = queryString.toString();
     Product.find({
-      keywords: { $regex: { $all: queryString } },
+      keywords: { $regex: string },
     })
+      // with regex we can get the items that contains the typed letters, don't need to be an exact match. with $all you can search for multiple items but has to be the exact word, else it returns you nothing.
+
       // { $all: lowerKeywords.split("+") }
       .limit(5)
       .select("name photoURL subcategory")
