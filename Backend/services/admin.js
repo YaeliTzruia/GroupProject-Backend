@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Purchase = require("../models/Purchase");
+const Product = require("../models/Product");
 
 const getAllUsersData = async () => {
   try {
@@ -26,8 +27,14 @@ const getTodaysPurchases = async () => {
     const midnightToday = today.setHours(0, 0, 0, 0);
     const todaysPurchases = await Purchase.find({
       createdAt: { $gt: midnightToday.toString() },
+    }).populate({
+      path: "items",
+      populate: {
+        path: "product",
+        model: "Product",
+      },
     });
-    console.log("how many purhcases today", todaysPurchases.length)
+    console.log("how many purhcases today", todaysPurchases.length);
     return todaysPurchases;
   } catch (err) {
     console.log(err);
