@@ -12,11 +12,11 @@ const searchLimit = async (req, res) => {
     // var replace = "regex\\d;";
     // var re = new RegExp(replace, "g");
     for (i = 0; i < queryArray.length; i++) {
-      console.log("i", i)
+      console.log("i", i);
       newQueryArray.push(`/${queryArray[i]}/`);
     }
-//     var regexFromMyArray = new RegExp(queryArray.join("|"), 'gi');
-// console.log("regex from my array", regexFromMyArray)
+    //     var regexFromMyArray = new RegExp(queryArray.join("|"), 'gi');
+    // console.log("regex from my array", regexFromMyArray)
     console.log("new query array", newQueryArray);
     // Product.find({ keywords: { $all: regexFromMyArray } });
     // const string = queryString.toString();
@@ -41,6 +41,16 @@ const searchAll = async (req, res) => {
     Product.findAll({ where: { keywords: { [Op.like]: "%" + term + "%" } } })
       .then((output) => res.send("search result", { output }))
       .catch((error) => console.log(error));
+  } catch (err) {
+    coneole.log(err);
+    return err;
+  }
+};
+
+const recentlyAdded = async (req, res) => {
+  try {
+    const recentlyAdded = await Product.find({}).sort({ createdAt: -1 }).limit(10);
+    res.send({status: "success", recentlyAdded: recentlyAdded})
   } catch (err) {
     coneole.log(err);
     return err;
@@ -81,4 +91,10 @@ const keywordSearch = async (req, res) => {
   }
 };
 
-module.exports = { searchLimit, searchAll, subcategories, keywordSearch };
+module.exports = {
+  searchLimit,
+  searchAll,
+  subcategories,
+  keywordSearch,
+  recentlyAdded,
+};
