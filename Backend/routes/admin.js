@@ -10,8 +10,7 @@ route.use(authCheck);
 route.use(adminCheck);
 
 route.get("/allpurchases", adminController.getAllPurchases);
-route.get("/dailypurchases", adminController.getAllPurchases);
-
+route.get("/dailypurchases", adminController.getDailyPurchases);
 route.get("/users", adminController.getAllUsers);
 route.get("/users/:userId", userCheck, usersController.getById);
 route.delete("/users/:userId", userCheck, adminController.delUser);

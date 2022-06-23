@@ -20,6 +20,20 @@ const getAllPurchasesData = async () => {
     return err;
   }
 };
+const getTodaysPurchases = async () => {
+  try {
+    const today = new Date();
+    const midnightToday = today.setHours(0, 0, 0, 0);
+    const todaysPurchases = await Purchase.find({
+      createdAt: { $gt: midnightToday.toString() },
+    });
+    console.log("how many purhcases today", todaysPurchases.length)
+    return todaysPurchases;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
 
 const delUser = async (id) => {
   console.log(id, "id");
@@ -37,4 +51,5 @@ module.exports = {
   getAllUsersData,
   delUser,
   getAllPurchasesData,
+  getTodaysPurchases,
 };
