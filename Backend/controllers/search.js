@@ -6,29 +6,14 @@ const searchLimit = async (req, res) => {
     console.log("req params", req.params);
     const { keywords } = req.params;
     const lowerKeywords = keywords.toLowerCase();
-    const queryArray = lowerKeywords.split("+");
-    console.log(queryArray);
-    const newQueryArray = [];
-    // var replace = "regex\\d;";
-    // var re = new RegExp(replace, "g");
-    for (i = 0; i < queryArray.length; i++) {
-      console.log("i", i);
-      newQueryArray.push(`/${queryArray[i]}/`);
-    }
-    //     var regexFromMyArray = new RegExp(queryArray.join("|"), 'gi');
-    // console.log("regex from my array", regexFromMyArray)
-    console.log("new query array", newQueryArray);
-    // Product.find({ keywords: { $all: regexFromMyArray } });
-    // const string = queryString.toString();
-    //   keywords: { $regex: { $all: queryString } },
-    // })
-    Product.find({ keywords: { $all: newQueryArray } })
+    const queryString = lowerKeywords.split("+");
+    const string = queryString.toString();
+    Product.find({ keywords: { $regex: string } })
 
       .limit(5)
       .select("name photoURL subcategory keywords")
       .then((output) => res.json(output))
       .catch((error) => console.log(error));
-    //console.log(string, "string");
   } catch (err) {
     console.log(err);
     return err;
@@ -49,8 +34,10 @@ const searchAll = async (req, res) => {
 
 const recentlyAdded = async (req, res) => {
   try {
-    const recentlyAdded = await Product.find({}).sort({ createdAt: -1 }).limit(10);
-    res.send({status: "success", recentlyAdded: recentlyAdded})
+    const recentlyAdded = await Product.find({})
+      .sort({ createdAt: -1 })
+      .limit(10);
+    res.send({ status: "success", recentlyAdded: recentlyAdded });
   } catch (err) {
     coneole.log(err);
     return err;
